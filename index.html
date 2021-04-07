@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
+        body{
+          
+            background-color: black;
+            display:flex;
+            align-items:center;
+            font-family: 'Kiwi Maru', serif;
+            display:grid;
+            justify-content: center; 
+
+        }
+        .container{
+           
+            
+            
+           
+        }
+        #card{
+            margin-top:60px;
+            
+            
+  
+
+        }
+        .card-body{
+            text-align:center;
+            border-bottom:2px solid grey;
+        
+        }
+        
+        .card{
+    background-color: white;
+    border-radius: 25px;
+    width:20rem;
+    
+
+
+        }
+
+        .card-body-img{
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+
+        }
+        img{
+            
+            height:250px;
+            width:250px;
+            margin-bottom:-30px;
+
+        }
+        .card-body-text{
+            color:rgb(184, 179, 179);
+            margin-top:-25px;
+        }
+        .card-footer{
+            display:flex;
+            font-size:10px;
+           background-color: rgb(236, 231, 231);
+           border-bottom-left-radius: 20px;
+           border-bottom-right-radius: 20px;
+           
+            
+        }
+        .card-footer-social{
+            margin-left:2rem;
+            margin-top:10px;
+            margin-bottom: 10px;
+
+            
+        }
+        .card-footer-social:first-child.card-footer-social p{
+           margin-left:-18px; 
+        }
+        .card-footer-social h3{
+            margin-bottom:-11px;
+
+        }
+        .card-footer-social p {
+            letter-spacing: 1px;
+        }
+
+        .card:hover {
+            transform: scale(0.9, 0.9);
+            box-shadow: 5px 5px 30px 15px rgba(0, 0, 0, 25), -5px -5px 30px 5px rgba(0, 0, 0.25);
+
+
+        }
+    </style>
+</head>
+
+<body>
+    // 
+    //left: 38%; 
+    <div id="container">
+        
+
+    </div>
+
+    <script>
+        const container = document.querySelector('#container');
+
+        const request = new XMLHttpRequest();
+        request.open('GET', "https://restcountries.eu/rest/v2/name/Republic of India");
+        request.send();
+
+        request.addEventListener('load', function () {
+            console.log(this.responseText);
+            const [data] = JSON.parse(this.response);
+            console.log(data.capital);
+            const htmlData = `
+            <div id="card">
+                <article class="card">
+                    <div class="card-body">
+                        <img src="${data.flag}" alt="" class="card-body-img" />
+                        <h1 class="card-body-title">
+                            ${data.name} <span></span>
+                        </h1>
+                        <p class="card-body-text">capital : ${data.capital}</p>
+                    </div>
+                    <div class="card-footer">
+                        <div class="card-footer-social">
+                            <h3>${data.nativeName}</h3>
+                            <p>Native Language</p>
+                        </div>
+                        <div class="card-footer-social">
+                            <h3>${data.population}</h3>
+                            <p>Population</p>
+                        </div>
+                        <div class="card-footer-social">
+                            <h3>${data.demonym}</h3>
+                            <p>Demonym</p>
+                        </div>
+    
+                    </div>
+    
+                </article>
+            </div>
+
+           `;
+           container.insertAdjacentHTML("afterbegin",htmlData)
+        })
+
+
+    </script>
+
+
+</body>
+
+</html>
